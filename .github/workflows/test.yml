@@ -1,0 +1,27 @@
+on: [push]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    name: Test action
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        id: hello
+        with:
+          region: cn-hangzhou
+          access-key-id: fake-access-key-id
+          access-key-secret: fake-access-key-secret
+          dry-run: 'true'
+
+      - name: Hello again
+        uses: ./ # Uses an action in the root directory
+        id: hello
+        with:
+          region: cn-hangzhou
+          help: 'true'

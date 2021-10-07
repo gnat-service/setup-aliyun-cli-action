@@ -1,0 +1,12 @@
+{
+    "mode": {
+        "required": false,
+        "default": "AK"
+    },
+    "profile": {
+        "default": "default"
+    },
+    "region": {
+        "required": true
+    }
+}

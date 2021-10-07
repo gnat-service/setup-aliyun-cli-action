@@ -1,0 +1,48 @@
+name: 'Setup Aliyun Cli'
+description: ${{description}}
+inputs:
+  version:
+    description: Aliyun cli version
+    required: false
+    default: '3.0.94'
+  platform:
+    description: OS platform
+    required: false
+    default: 'amd64'
+  dry-run:
+    description: Dry run
+    required: false
+    default: 'false'
+${{inputs}}
+runs:
+  using: "composite"
+  steps:
+    - id: download-aliyun-cli
+      shell: bash
+      run: |
+        curl -LO https://github.com/aliyun/aliyun-cli/releases/download/v${{ inputs.version }}/aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+        tar -xzvf aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+        mv aliyun /usr/local/bin/
+    - id: setup-aliyun-cli
+      shell: bash
+      run: |
+        filter() {
+          if [[ -n "$2" ]]; then
+            if [[ "$2" = "true" ]]; then
+              echo "\
+                --$1"
+            elif [[ "$2" != "false" ]];then
+              echo "\
+                --$1 $2"
+            fi
+          fi
+        }
+        PARAMS=${{params}}
+        if [[ '${{ inputs.dry-run }}' = 'true' ]]; then
+          echo 'aliyun configure set $PARAMS'
+        else
+          aliyun configure set $PARAMS
+        fi
+branding:
+  icon: 'award'
+  color: 'green'

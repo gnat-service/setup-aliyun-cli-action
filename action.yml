@@ -1,0 +1,113 @@
+name: 'Setup Aliyun Cli'
+description: 使用非交互式方式进行配置
+inputs:
+  version:
+    description: Aliyun cli version
+    required: false
+    default: '3.0.94'
+  platform:
+    description: OS platform
+    required: false
+    default: 'amd64'
+  dry-run:
+    description: Dry run
+    required: false
+    default: 'false'
+
+  mode:
+    required: false
+    default: 'AK'
+    description: '使用 `--mode {AK|StsToken|RamRoleArn|EcsRamRole|RsaKeyPair|RamRoleArnWithRoleName}` 指定认证方式'
+  profile:
+    required: false
+    default: 'default'
+    description: '使用 `--profile <profileName>` 指定操作的配置集'
+  language:
+    required: false
+    description: '使用 `--language [en|zh]` 来指定语言'
+  region:
+    required: true
+    description: '使用 `--region <regionId>` 来指定访问大区'
+  config-path:
+    required: false
+    description: '使用 `--config-path` 指定配置文件路径'
+  access-key-id:
+    required: false
+    description: '使用 `--access-key-id <AccessKeyId>` 指定AccessKeyId'
+  access-key-secret:
+    required: false
+    description: '使用 `--access-key-secret <AccessKeySecret>` 指定AccessKeySecret'
+  sts-token:
+    required: false
+    description: '使用 `--sts-token <StsToken>` 指定StsToken'
+  sts-region:
+    required: false
+    description: '使用 `--sts-region <StsRegion>` 指定StsRegion'
+  ram-role-name:
+    required: false
+    description: '使用 `--ram-role-name <RamRoleName>` 指定RamRoleName'
+  ram-role-arn:
+    required: false
+    description: '使用 `--ram-role-arn <RamRoleArn>` 指定RamRoleArn'
+  role-session-name:
+    required: false
+    description: '使用 `--role-session-name <RoleSessionName>` 指定RoleSessionName'
+  private-key:
+    required: false
+    description: '使用 `--private-key <PrivateKey>` 指定RSA私钥'
+  key-pair-name:
+    required: false
+    description: '使用 `--key-pair-name <KeyPairName>` 指定KeyPairName'
+  read-timeout:
+    required: false
+    description: '使用 `--read-timeout <seconds>` 指定I/O超时时间(秒)'
+  connect-timeout:
+    required: false
+    description: '使用 `--connect-timeout <seconds>` 指定请求连接超时时间(秒)'
+  retry-count:
+    required: false
+    description: '使用 `--retry-count <count>` 指定重试次数'
+  skip-secure-verify:
+    required: false
+    description: '使用 `--skip-secure-verify` 跳过https的证书校验 [不推荐使用]'
+  expired-seconds:
+    required: false
+    description: '使用 `--expired-seconds <seconds>` 指定凭证过期时间'
+  process-command:
+    required: false
+    description: '使用 `--process-command <ProcessCommand>` 指定外部程序运行命令'
+  help:
+    required: false
+    description: '打印帮助信息'
+runs:
+  using: "composite"
+  steps:
+    - id: download-aliyun-cli
+      shell: bash
+      run: |
+        curl -LO https://github.com/aliyun/aliyun-cli/releases/download/v${{ inputs.version }}/aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+        tar -xzvf aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+        mv aliyun /usr/local/bin/
+    - id: setup-aliyun-cli
+      shell: bash
+      run: |
+        filter() {
+          if [[ -n "$2" ]]; then
+            if [[ "$2" = "true" ]]; then
+              echo "\
+                --$1"
+            elif [[ "$2" != "false" ]];then
+              echo "\
+                --$1 $2"
+            fi
+          fi
+        }
+        PARAMS="$(filter mode ${{ inputs.mode }}) $(filter profile ${{ inputs.profile }}) $(filter language ${{ inputs.language }}) $(filter region ${{ inputs.region }}) $(filter config-path ${{ inputs.config-path }}) $(filter access-key-id ${{ inputs.access-key-id }}) $(filter access-key-secret ${{ inputs.access-key-secret }}) $(filter sts-token ${{ inputs.sts-token }}) $(filter sts-region ${{ inputs.sts-region }}) $(filter ram-role-name ${{ inputs.ram-role-name }}) $(filter ram-role-arn ${{ inputs.ram-role-arn }}) $(filter role-session-name ${{ inputs.role-session-name }}) $(filter private-key ${{ inputs.private-key }}) $(filter key-pair-name ${{ inputs.key-pair-name }}) $(filter read-timeout ${{ inputs.read-timeout }}) $(filter connect-timeout ${{ inputs.connect-timeout }}) $(filter retry-count ${{ inputs.retry-count }}) $(filter skip-secure-verify ${{ inputs.skip-secure-verify }}) $(filter expired-seconds ${{ inputs.expired-seconds }}) $(filter process-command ${{ inputs.process-command }}) $(filter help ${{ inputs.help }})"}
+        if [[ '${{ inputs.dry-run }}' = 'true' ]]; then
+          echo 'aliyun configure set $PARAMS'
+        else
+          aliyun configure set $PARAMS
+        fi
+branding:
+  icon: 'award'
+  color: 'green'
