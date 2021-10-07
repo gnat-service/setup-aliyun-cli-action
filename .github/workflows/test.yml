@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
+        uses: gnat-service/setup-aliyun-cli-action@v1
         id: hello
         with:
           region: cn-hangzhou
@@ -20,7 +20,7 @@ jobs:
           dry-run: 'true'
 
       - name: Hello again
-        uses: ./ # Uses an action in the root directory
+        uses: gnat-service/setup-aliyun-cli-action@v1
         id: hello-again
         with:
           region: cn-hangzhou
