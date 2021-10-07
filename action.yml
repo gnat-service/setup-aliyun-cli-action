@@ -102,9 +102,9 @@ runs:
             fi
           fi
         }
-        PARAMS="$(filter mode ${{ inputs.mode }}) $(filter profile ${{ inputs.profile }}) $(filter language ${{ inputs.language }}) $(filter region ${{ inputs.region }}) $(filter config-path ${{ inputs.config-path }}) $(filter access-key-id ${{ inputs.access-key-id }}) $(filter access-key-secret ${{ inputs.access-key-secret }}) $(filter sts-token ${{ inputs.sts-token }}) $(filter sts-region ${{ inputs.sts-region }}) $(filter ram-role-name ${{ inputs.ram-role-name }}) $(filter ram-role-arn ${{ inputs.ram-role-arn }}) $(filter role-session-name ${{ inputs.role-session-name }}) $(filter private-key ${{ inputs.private-key }}) $(filter key-pair-name ${{ inputs.key-pair-name }}) $(filter read-timeout ${{ inputs.read-timeout }}) $(filter connect-timeout ${{ inputs.connect-timeout }}) $(filter retry-count ${{ inputs.retry-count }}) $(filter skip-secure-verify ${{ inputs.skip-secure-verify }}) $(filter expired-seconds ${{ inputs.expired-seconds }}) $(filter process-command ${{ inputs.process-command }}) $(filter help ${{ inputs.help }})"}
+        PARAMS="$(filter mode ${{ inputs.mode }}) $(filter profile ${{ inputs.profile }}) $(filter language ${{ inputs.language }}) $(filter region ${{ inputs.region }}) $(filter config-path ${{ inputs.config-path }}) $(filter access-key-id ${{ inputs.access-key-id }}) $(filter access-key-secret ${{ inputs.access-key-secret }}) $(filter sts-token ${{ inputs.sts-token }}) $(filter sts-region ${{ inputs.sts-region }}) $(filter ram-role-name ${{ inputs.ram-role-name }}) $(filter ram-role-arn ${{ inputs.ram-role-arn }}) $(filter role-session-name ${{ inputs.role-session-name }}) $(filter private-key ${{ inputs.private-key }}) $(filter key-pair-name ${{ inputs.key-pair-name }}) $(filter read-timeout ${{ inputs.read-timeout }}) $(filter connect-timeout ${{ inputs.connect-timeout }}) $(filter retry-count ${{ inputs.retry-count }}) $(filter skip-secure-verify ${{ inputs.skip-secure-verify }}) $(filter expired-seconds ${{ inputs.expired-seconds }}) $(filter process-command ${{ inputs.process-command }}) $(filter help ${{ inputs.help }})"
         if [[ '${{ inputs.dry-run }}' = 'true' ]]; then
-          echo 'aliyun configure set $PARAMS'
+          echo "aliyun configure set $PARAMS"
         else
           aliyun configure set $PARAMS
         fi

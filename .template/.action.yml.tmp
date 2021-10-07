@@ -39,7 +39,7 @@ runs:
         }
         PARAMS=${{params}}
         if [[ '${{ inputs.dry-run }}' = 'true' ]]; then
-          echo 'aliyun configure set $PARAMS'
+          echo "aliyun configure set $PARAMS"
         else
           aliyun configure set $PARAMS
         fi

@@ -80,7 +80,7 @@ exec('aliyun configure set --help', (error, stdout, stderr) => {
 
     const content = temp.replace('${{description}}', description)
         .replace('${{inputs}}', `\n${inputs}`)
-        .replace('${{params}', `"${params}"`);
+        .replace('${{params}}', `"${params}"`);
 
     fs.writeFileSync(dist, content);
 });
