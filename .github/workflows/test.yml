@@ -21,7 +21,7 @@ jobs:
 
       - name: Hello again
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: hello-again
         with:
           region: cn-hangzhou
           help: 'true'
