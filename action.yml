@@ -1,4 +1,4 @@
-name: gnat-service/setup-aliyun-cli
+name: gnat-service/setup-aliyun-cli-action
 description: 使用非交互式方式进行配置
 inputs:
   version:

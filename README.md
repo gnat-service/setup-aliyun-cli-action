@@ -6,7 +6,7 @@
 jobs:
     some-job:
     - name: Setup Aliyun Cli
-    uses: gnat-service/setup-aliyun-cli@v1
+    uses: gnat-service/setup-aliyun-cli-action@v1
     with:
         region: <region> # "cn-hangzhou" for instance.
         access-key-id: <access-key-id> # your aliyun access key id
