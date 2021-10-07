@@ -1,4 +1,4 @@
-name: 'Setup Aliyun Cli'
+name: gnat-service/setup-aliyun-cli
 description: ${{description}}
 inputs:
   version:
