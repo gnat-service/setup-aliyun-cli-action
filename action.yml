@@ -83,12 +83,16 @@ runs:
   using: "composite"
   steps:
     - id: download-aliyun-cli
-      if: inputs.version
       shell: bash
       run: |
-        curl -LO https://github.com/aliyun/aliyun-cli/releases/download/v${{ inputs.version }}/aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
-        tar -xzvf aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
-        mv aliyun /usr/local/bin/
+        if [[ -n "${{ inputs.version }}" ]]; then
+          echo "Downloading Aliyun cli version {{ inputs.version }}"
+          curl -LO https://github.com/aliyun/aliyun-cli/releases/download/v${{ inputs.version }}/aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+          tar -xzvf aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
+          mv aliyun /usr/local/bin/
+        else
+          echo "No version specified, skip downloading. Current version is $(aliyun version)"
+        fi
     - id: setup-aliyun-cli
       shell: bash
       run: |
