@@ -25,3 +25,7 @@ jobs:
         with:
           region: cn-hangzhou
           help: 'true'
+
+      - name: Print Configurations
+        id: print-configurations
+        run: aliyun configure help
