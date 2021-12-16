@@ -4,7 +4,7 @@ inputs:
   version:
     description: Aliyun cli version
     required: false
-    default: '3.0.94'
+    default: ''
   platform:
     description: OS platform
     required: false
@@ -18,6 +18,7 @@ runs:
   using: "composite"
   steps:
     - id: download-aliyun-cli
+      if: inputs.version
       shell: bash
       run: |
         curl -LO https://github.com/aliyun/aliyun-cli/releases/download/v${{ inputs.version }}/aliyun-cli-linux-${{ inputs.version }}-${{ inputs.platform }}.tgz
