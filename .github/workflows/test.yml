@@ -17,7 +17,6 @@ jobs:
           region: cn-hangzhou
           access-key-id: fake-access-key-id
           access-key-secret: fake-access-key-secret
-          dry-run: 'true'
 
       - name: Hello again
         uses: ./
