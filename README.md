@@ -4,7 +4,7 @@
 
 ```yaml
 jobs:
-    some-job:
+  some-job:
     - name: Setup Aliyun Cli
       uses: gnat-service/setup-aliyun-cli-action@v2
       with:
