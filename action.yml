@@ -1,5 +1,5 @@
 name: gnat-service/setup-aliyun-cli-action
-description: 使用非交互式方式进行配置
+description: set config in non interactive mode
 inputs:
   version:
     description: Aliyun cli version
@@ -17,68 +17,68 @@ inputs:
   mode:
     required: false
     default: 'AK'
-    description: '使用 `--mode {AK|StsToken|RamRoleArn|EcsRamRole|RsaKeyPair|RamRoleArnWithRoleName}` 指定认证方式'
+    description: 'use `--mode {AK|StsToken|RamRoleArn|EcsRamRole|RsaKeyPair|RamRoleArnWithRoleName}` to assign authenticate mode'
   profile:
     required: false
     default: 'default'
-    description: '使用 `--profile <profileName>` 指定操作的配置集'
+    description: 'use `--profile <profileName>` to select profile'
   language:
     required: false
-    description: '使用 `--language [en|zh]` 来指定语言'
+    description: 'use `--language [en|zh]` to assign language'
   region:
     required: true
-    description: '使用 `--region <regionId>` 来指定访问大区'
+    description: 'use `--region <regionId>` to assign region'
   config-path:
     required: false
-    description: '使用 `--config-path` 指定配置文件路径'
+    description: 'use `--config-path` to specify the configuration file path'
   access-key-id:
     required: false
-    description: '使用 `--access-key-id <AccessKeyId>` 指定AccessKeyId'
+    description: 'use `--access-key-id <AccessKeyId>` to assign AccessKeyId, required in AK/StsToken/RamRoleArn mode'
   access-key-secret:
     required: false
-    description: '使用 `--access-key-secret <AccessKeySecret>` 指定AccessKeySecret'
+    description: 'use `--access-key-secret <AccessKeySecret>` to assign AccessKeySecret'
   sts-token:
     required: false
-    description: '使用 `--sts-token <StsToken>` 指定StsToken'
+    description: 'use `--sts-token <StsToken>` to assign StsToken'
   sts-region:
     required: false
-    description: '使用 `--sts-region <StsRegion>` 指定StsRegion'
+    description: 'use `--sts-region <StsRegion>` to assign StsRegion'
   ram-role-name:
     required: false
-    description: '使用 `--ram-role-name <RamRoleName>` 指定RamRoleName'
+    description: 'use `--ram-role-name <RamRoleName>` to assign RamRoleName'
   ram-role-arn:
     required: false
-    description: '使用 `--ram-role-arn <RamRoleArn>` 指定RamRoleArn'
+    description: 'use `--ram-role-arn <RamRoleArn>` to assign RamRoleArn'
   role-session-name:
     required: false
-    description: '使用 `--role-session-name <RoleSessionName>` 指定RoleSessionName'
+    description: 'use `--role-session-name <RoleSessionName>` to assign RoleSessionName'
   private-key:
     required: false
-    description: '使用 `--private-key <PrivateKey>` 指定RSA私钥'
+    description: 'use `--private-key <PrivateKey>` to assign RSA PrivateKey'
   key-pair-name:
     required: false
-    description: '使用 `--key-pair-name <KeyPairName>` 指定KeyPairName'
+    description: 'use `--key-pair-name <KeyPairName>` to assign KeyPairName'
   read-timeout:
     required: false
-    description: '使用 `--read-timeout <seconds>` 指定I/O超时时间(秒)'
+    description: 'use `--read-timeout <seconds>` to set I/O timeout(seconds)'
   connect-timeout:
     required: false
-    description: '使用 `--connect-timeout <seconds>` 指定请求连接超时时间(秒)'
+    description: 'use `--connect-timeout <seconds>` to set connect timeout(seconds)'
   retry-count:
     required: false
-    description: '使用 `--retry-count <count>` 指定重试次数'
+    description: 'use `--retry-count <count>` to set retry count'
   skip-secure-verify:
     required: false
-    description: '使用 `--skip-secure-verify` 跳过https的证书校验 [不推荐使用]'
+    description: 'use `--skip-secure-verify` to skip https certification validate [Not recommended]'
   expired-seconds:
     required: false
-    description: '使用 `--expired-seconds <seconds>` 指定凭证过期时间'
+    description: 'use `--expired-seconds <seconds>` to specify expiration time'
   process-command:
     required: false
-    description: '使用 `--process-command <ProcessCommand>` 指定外部程序运行命令'
+    description: 'use `--process-command <ProcessCommand>` to specify external program execution command'
   help:
     required: false
-    description: '打印帮助信息'
+    description: 'print help'
 runs:
   using: "composite"
   steps:
