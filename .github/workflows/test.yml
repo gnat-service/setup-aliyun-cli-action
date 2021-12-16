@@ -28,4 +28,4 @@ jobs:
 
       - name: Print Configurations
         id: print-configurations
-        run: aliyun configure help
+        run: aliyun configure list
